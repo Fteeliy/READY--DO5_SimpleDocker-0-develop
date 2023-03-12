@@ -1,0 +1,30 @@
+
+
+version: "3"
+
+networks:
+    local:
+        driver: bridge
+
+services:
+    biba:
+        build:
+            context: biba/
+            dockerfile: Dockerfile
+        image: biba:1.0
+        container_name: s21_biba
+        networks: 
+            - local
+
+    boba:
+        build:
+            context: boba/
+            dockerfile: Dockerfile
+        image: boba:1.0
+        container_name: s21_boba
+        networks: 
+            - local
+        ports: 
+            - "80:8080"
+        depends_on: 
+            - biba
